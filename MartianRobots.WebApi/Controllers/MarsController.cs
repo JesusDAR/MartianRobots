@@ -1,4 +1,5 @@
-﻿using MartianRobots.WebApi.Services.Interfaces;
+﻿using MartianRobots.WebApi.DTOs;
+using MartianRobots.WebApi.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,18 @@ namespace MartianRobots.WebApi.Controllers
         public MarsController(IMarsServices marsServices)
         {
             _marsServices = marsServices;
+        }
+
+        [HttpGet()]
+        public IActionResult GetSize()
+        {
+            return Ok();
+        }
+
+        [HttpPost()]
+        public IActionResult SetSize([FromBody] MarsDTO marsDTO)
+        {
+            return Ok();
         }
     }
 }
