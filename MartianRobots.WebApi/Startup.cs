@@ -1,3 +1,5 @@
+using MartianRobots.Core.Repositories;
+using MartianRobots.Core.Repositories.Interfaces;
 using MartianRobots.WebApi.Services;
 using MartianRobots.WebApi.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +33,7 @@ namespace MartianRobots.WebApi
 
             services.AddControllers();
             services.RegisterServices();
+            services.RegisterRepositories();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MartianRobots.WebApi", Version = "v1" });
@@ -67,6 +70,16 @@ namespace MartianRobots.WebApi
         {
             services.AddTransient<IRobotServices, RobotServices>();
             services.AddTransient<IMarsServices, MarsServices>();
+            return services;
+        }
+    }
+
+    public static class RepositoryExtensions
+    {
+        public static IServiceCollection RegisterRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IInformationRepository, InformationRepository>();
+            services.AddScoped<IMarsRepository, MarsRepository>();
             return services;
         }
     }

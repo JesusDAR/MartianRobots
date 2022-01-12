@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartianRobots.WebApi", "MartianRobots.WebApi\MartianRobots.WebApi.csproj", "{9BE5A05D-94DF-470C-93A7-BE8F29AB1279}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartianRobots.WebApi", "MartianRobots.WebApi\MartianRobots.WebApi.csproj", "{9BE5A05D-94DF-470C-93A7-BE8F29AB1279}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartianRobots.Core", "MartianRobots.Core\MartianRobots.Core.csproj", "{A1F19657-C7A4-4DB3-AB0D-62E8771CF179}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9BE5A05D-94DF-470C-93A7-BE8F29AB1279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BE5A05D-94DF-470C-93A7-BE8F29AB1279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BE5A05D-94DF-470C-93A7-BE8F29AB1279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1F19657-C7A4-4DB3-AB0D-62E8771CF179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1F19657-C7A4-4DB3-AB0D-62E8771CF179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1F19657-C7A4-4DB3-AB0D-62E8771CF179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1F19657-C7A4-4DB3-AB0D-62E8771CF179}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
