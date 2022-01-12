@@ -7,8 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MartianRobotsDb.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="MartianRobotsDb.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+    <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MartianRobots.Core\MartianRobots.Core.csproj" />
   </ItemGroup>
 
 </Project>
