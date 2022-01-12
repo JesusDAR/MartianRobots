@@ -1,3 +1,4 @@
+using AutoMapper;
 using MartianRobots.Core.Repositories;
 using MartianRobots.Core.Repositories.Interfaces;
 using MartianRobots.WebApi.Services;
@@ -34,6 +35,7 @@ namespace MartianRobots.WebApi
             services.AddControllers();
             services.RegisterServices();
             services.RegisterRepositories();
+            services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MartianRobots.WebApi", Version = "v1" });
