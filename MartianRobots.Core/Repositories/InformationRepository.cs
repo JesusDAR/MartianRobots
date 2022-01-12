@@ -23,15 +23,10 @@ namespace MartianRobots.Core.Repositories
         }
         public int Add(Information entity)
         {
-            string sql = "INSERT INTO Mars (X, Y) VALUES (@X, @Y)";
-            using (IDbConnection connection = new SQLiteConnection(_connectionString))
-            {
-                int id = connection.Execute(sql, entity);
-                return id;
-            }
+            throw new NotImplementedException();
         }
 
-        public int Delete(int id)
+        public void Delete()
         {
             throw new NotImplementedException();
         }

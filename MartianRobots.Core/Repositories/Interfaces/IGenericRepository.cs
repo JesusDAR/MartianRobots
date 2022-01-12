@@ -11,6 +11,6 @@ namespace MartianRobots.Core.Repositories.Interfaces
         T Get();
         int Add(T entity);
         int Update(T entity);
-        int Delete(int id);
+        void Delete();
     }
 }
