@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MartianRobots.WebApi.Controllers
 {
     [ApiController]
-    [Route("/api/robots")]
+    [Route("/api/mars")]
     public class MarsController : ControllerBase
     {
         private readonly IMarsServices _marsServices;
@@ -19,14 +19,16 @@ namespace MartianRobots.WebApi.Controllers
         }
 
         [HttpGet()]
-        public IActionResult GetSize()
+        public IActionResult GetMars()
         {
-            return Ok();
+            MarsDTO marsDTO = _marsServices.GetMars();
+            return Ok(marsDTO);
         }
 
         [HttpPost()]
-        public IActionResult SetSize([FromBody] MarsDTO marsDTO)
+        public IActionResult SetMars([FromBody] MarsDTO marsDTO)
         {
+            _marsServices.SetMars(marsDTO);
             return Ok();
         }
     }

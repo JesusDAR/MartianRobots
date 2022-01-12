@@ -1,5 +1,10 @@
-﻿using MartianRobots.WebApi.DTOs;
+﻿using AutoMapper;
+using MartianRobots.Core.Entities;
+using MartianRobots.Core.Repositories;
+using MartianRobots.Core.Repositories.Interfaces;
+using MartianRobots.WebApi.DTOs;
 using MartianRobots.WebApi.Services.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +14,37 @@ namespace MartianRobots.WebApi.Services
 {
     public class MarsServices : IMarsServices
     {
-        public void SetSize(MarsDTO marsDTO)
+        private readonly IMarsRepository _marsRepository;
+        private readonly IMapper _mapper;
+        public MarsServices(IMarsRepository marsRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _marsRepository = marsRepository;
+            _mapper = mapper;
+        }
+        public void SetMars(MarsDTO marsDTO)
+        {
+            if (GetMars() != null)
+                UpdateMars(marsDTO);
+            else
+            {
+                Mars mars = _mapper.Map<Mars>(marsDTO);
+                _marsRepository.Add(mars);
+            }
+        }
+        public MarsDTO GetMars()
+        {
+            Mars mars = _marsRepository.Get();
+            MarsDTO marsDTO = _mapper.Map<MarsDTO>(mars);
+            return marsDTO;
+        }
+        public void DeleteMars()
+        {
+            _marsRepository.Delete();
+        }
+        public void UpdateMars(MarsDTO marsDTO)
+        {
+            Mars mars = _mapper.Map<Mars>(marsDTO);
+            _marsRepository.Update(mars);
         }
     }
 }
