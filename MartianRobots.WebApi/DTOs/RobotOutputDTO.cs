@@ -11,5 +11,6 @@ namespace MartianRobots.WebApi.DTOs
         public int Y { get; set; }
         public string Or { get; set; }
         public bool Success { get; set; }
+        public ErrorDTO Error { get; set; }
     }
 }

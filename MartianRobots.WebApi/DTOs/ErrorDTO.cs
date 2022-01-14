@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace MartianRobots.WebApi.DTOs
 {
-    public class MarsDTO
+    public class ErrorDTO
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public ErrorDTO Error { get; set; }
+        public HttpStatusCode Code { get; set; }
+        public string Message { get; set; }
     }
 }
