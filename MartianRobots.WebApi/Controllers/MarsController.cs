@@ -1,5 +1,6 @@
 ﻿using MartianRobots.WebApi.DTOs;
 using MartianRobots.WebApi.Services.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace MartianRobots.WebApi.Controllers
 {
     [ApiController]
     [Route("/api/mars")]
+    [EnableCors("CorsPolicy")]
     public class MarsController : ControllerBase
     {
         private readonly IMarsServices _marsServices;
@@ -29,7 +31,7 @@ namespace MartianRobots.WebApi.Controllers
         public IActionResult SetMars([FromBody] MarsDTO marsDTO)
         {
             _marsServices.SetMars(marsDTO);
-            return Ok();
+            return Ok(marsDTO);
         }
     }
 }

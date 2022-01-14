@@ -21,15 +21,24 @@ namespace MartianRobots.WebApi.Services
             _marsRepository = marsRepository;
             _mapper = mapper;
         }
-        public void SetMars(MarsDTO marsDTO)
+        public MarsDTO SetMars(MarsDTO marsDTO)
         {
-            if (GetMars() != null)
-                UpdateMars(marsDTO);
-            else
+            marsDTO.Error = new ErrorDTO { };
+            try
             {
-                Mars mars = _mapper.Map<Mars>(marsDTO);
-                _marsRepository.Add(mars);
+                if (GetMars() != null)
+                    UpdateMars(marsDTO);
+                else
+                {
+                    Mars mars = _mapper.Map<Mars>(marsDTO);
+                    _marsRepository.Add(mars);
+                }
             }
+            catch (Exception e)
+            {
+                marsDTO.Error.Message = e.Message;
+            }
+            return marsDTO;
         }
         public MarsDTO GetMars()
         {

@@ -9,7 +9,7 @@ namespace MartianRobots.WebApi.Services.Interfaces
 {
     public interface IMarsServices
     {
-        public void SetMars(MarsDTO marsDTO);
+        public MarsDTO SetMars(MarsDTO marsDTO);
         public MarsDTO GetMars();
         public void DeleteMars();
         public void UpdateMars(MarsDTO marsDTO);

@@ -33,6 +33,15 @@ namespace MartianRobots.WebApi
         {
 
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials().WithOrigins("http://localhost:8080", "http://localhost:8081")
+                    );
+            });
             services.RegisterServices();
             services.RegisterRepositories();
             services.AddAutoMapper(typeof(Startup));
@@ -55,7 +64,7 @@ namespace MartianRobots.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -78,11 +87,11 @@ namespace MartianRobots.WebApi
 
     public static class RepositoryExtensions
     {
-        public static IServiceCollection RegisterRepositories(this IServiceCollection services)
+        public static IServiceCollection RegisterRepositories(this IServiceCollection repositories)
         {
-            services.AddScoped<IInformationRepository, InformationRepository>();
-            services.AddScoped<IMarsRepository, MarsRepository>();
-            return services;
+            repositories.AddScoped<IInformationRepository, InformationRepository>();
+            repositories.AddScoped<IMarsRepository, MarsRepository>();
+            return repositories;
         }
     }
 }
