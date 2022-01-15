@@ -18,7 +18,7 @@
                         <v-row class="mt-2">
                             <v-col>
                                 <v-text-field
-                                v-model.number="x"
+                                v-model.number="mars_x"
                                 label="X"
                                 type="number"
                                 min="0"
@@ -27,7 +27,7 @@
                             </v-col>
                             <v-col>
                                 <v-text-field
-                                v-model.number="y"
+                                v-model.number="mars_y"
                                 label="Y"
                                 type="number"
                                 min="0"
@@ -62,40 +62,40 @@
                             </v-col>
                             <v-col>
                                 <v-select
-                                    :items="orientation"
+                                    :items="orientations"
+                                    v-model="orientation"
                                     label="Orientation"
                                 ></v-select>                                
                             </v-col>                            
                         </v-row>
                         <v-row justify="center" class="mt-2">
-                            <v-btn class="mt-2" color="success" @click="setRight">Set Initial Position</v-btn>
+                            <v-btn class="mt-2" color="warning" @click="setRight">Set Initial Position</v-btn>
                         </v-row>
 
                         <v-row justify="center" class="mt-5">
                             <h3>New Robot Position</h3>
                         </v-row>
                         <v-row class="mt-5">
-                            <v-col cols="2" class="mt-5" align="right">
+                            <v-col cols="2" class="mt-5" align="">
                                 <v-btn color="primary" @click="setLeft"><v-icon>mdi-chevron-left</v-icon></v-btn>
                             </v-col>
-                            <v-col cols="2" align="center">
-                                <v-btn color="primary" @click="setUp"><v-icon>mdi-chevron-up</v-icon></v-btn>
-                                <v-btn color="primary" @click="setDown"><v-icon>mdi-chevron-down</v-icon></v-btn>
-                            </v-col>                              
-                            <v-col cols="2" class="mt-5" align="left">
+                            <v-col cols="2" class="mt-5" align="">
                                 <v-btn color="primary" @click="setRight"><v-icon>mdi-chevron-right</v-icon></v-btn>
                             </v-col>
-                            <v-col cols="6" class="mt-3" align="center">
+                            <v-col cols="3" class="mt-5" align="">
                                 <v-btn color="primary" @click="setForward">Forward</v-btn>
+                            </v-col>
+                            <v-col cols="4" class="mt-5 offset" align="right">
+                                <v-btn color="success" @click="setMovements">Enter</v-btn>
                             </v-col>                            
                         </v-row>
                         <v-row class="mt-5">
                             <v-text-field
                             label="Movements"
+                            v-model="updateMovements"
                             outlined
                             readonly
-                            ></v-text-field>
-                            <v-btn class="mt-2" color="success" @click="setMove">New Move</v-btn>
+                            ></v-text-field>    
                         </v-row>
 
                         <v-row justify="center" class="mt-5">
@@ -105,10 +105,9 @@
                             <v-textarea
                             outlined
                             label="Output"
-                            hint=""
                             rows="10"
                             v-model="output"
-                            disabled
+                            readonly
                             ></v-textarea>                            
                         </v-row>
 
@@ -124,11 +123,13 @@ export default {
     name: "Layout",
     data (){
         return {
-            x: 0,
-            y: 0,
+            mars_x: 0,
+            mars_y: 0,
             robot_x: 0,
             robot_y: 0,
-            orientation: ['N', 'E', 'S', 'W'],
+            orientations: ['N', 'E', 'S', 'W'],
+            orientation: '',
+            movements: '',
             output: ''
 
         }
@@ -136,29 +137,39 @@ export default {
     methods: {
         setMars() {
             let mars = {
-                x: this.x,
-                y: this.y
+                x: this.mars_x,
+                y: this.mars_y
             }
             this.$store.dispatch('setMars', mars)
         },
+        setRobot() {
+            let robot = {
+                x: this.robot_x,
+                y: this.robot_y,
+                or: this.orientation
+            }
+            this.$store.commit('setRobot', robot)
+        },
+
+        setMovements() {
+            this.$store.dispatch('sendRobot')            
+        },
+
         setLeft() {
-
-        },
-        setUp() {
-
-        },
-        setDown() {
-
+            this.movements = this.movements.concat('L')
         },
         setRight() {
-
+            this.movements = this.movements.concat('R')
         },
         setForward() {
-
+            this.movements = this.movements.concat('F')
         },
-        setMove() {
-
-        }        
+    },
+    computed: {
+        updateMovements() {
+            this.$store.commit('setMovements', this.movements)
+            return this.movements
+        }
     }
 }
 </script>
