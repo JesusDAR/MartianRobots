@@ -19,26 +19,42 @@ namespace MartianRobots.Core.Repositories
         public InformationRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            _connectionString = _configuration.GetConnectionString("DefaultConnnection");
+            _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
         public int Add(Information entity)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO Information (RobotsLost, RobotsSucceeded, SurfaceExplored, SurfaceUnexplored) VALUES (@RobotsLost, @RobotsSucceeded, @SurfaceExplored, @SurfaceUnexplored)";
+            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            {
+                int id = connection.Execute(sql, entity);
+                return id;
+            }
         }
-
-        public void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Information Get()
-        {
-            throw new NotImplementedException();
-        }
-
         public int Update(Information entity)
         {
-            throw new NotImplementedException();
+            string sql = "UPDATE Information SET RobotsLost = @RobotsLost, RobotsSucceeded = @RobotsSucceeded, SurfaceExplored = @SurfaceExplored, SurfaceUnexplored = @SurfaceUnexplored";
+            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            {
+                int id = connection.Execute(sql, entity);
+                return id;
+            }
+        }
+        public void Delete()
+        {
+            string sql = "DELETE FROM Information";
+            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            {
+                connection.Execute(sql);
+            }
+        }
+        public Information Get()
+        {
+            string sql = "SELECT * FROM  Information";
+            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            {
+                Information information = connection.QueryFirst<Information>(sql);
+                return information;
+            }
         }
     }
 }

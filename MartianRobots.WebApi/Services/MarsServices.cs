@@ -26,7 +26,7 @@ namespace MartianRobots.WebApi.Services
             marsDTO.Error = new ErrorDTO { };
             try
             {
-                if (GetMars() != null)
+                if(!(GetMars().X == 0 && GetMars().Y == 0) )
                     UpdateMars(marsDTO);
                 else
                 {
@@ -42,18 +42,40 @@ namespace MartianRobots.WebApi.Services
         }
         public MarsDTO GetMars()
         {
-            Mars mars = _marsRepository.Get();
-            MarsDTO marsDTO = _mapper.Map<MarsDTO>(mars);
+            MarsDTO marsDTO = new() { Error = new() };
+            try
+            {
+                Mars mars = _marsRepository.Get();
+                marsDTO = _mapper.Map<MarsDTO>(mars);
+            }
+            catch (Exception e)
+            {
+                marsDTO.Error.Message = e.Message;
+            }
             return marsDTO;
         }
         public void DeleteMars()
         {
-            _marsRepository.Delete();
+            try
+            {
+                _marsRepository.Delete();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public void UpdateMars(MarsDTO marsDTO)
         {
-            Mars mars = _mapper.Map<Mars>(marsDTO);
-            _marsRepository.Update(mars);
+            try
+            {
+                Mars mars = _mapper.Map<Mars>(marsDTO);
+                _marsRepository.Update(mars);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

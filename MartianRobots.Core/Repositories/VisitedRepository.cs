@@ -12,49 +12,51 @@ using System.Threading.Tasks;
 
 namespace MartianRobots.Core.Repositories
 {
-    public class MarsRepository : IMarsRepository
+    public class VisitedRepository : IVisitedRepository
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
-        public MarsRepository(IConfiguration configuration)
+
+        public VisitedRepository(IConfiguration configuration)
         {
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
-        public int Add(Mars entity)
+        public int Add(Visited entity)
         {
-            string sql = "INSERT INTO Mars (X, Y) VALUES (@X, @Y)";
+            string sql = "INSERT INTO Visited (X, Y) VALUES (@X, @Y)";
             using (IDbConnection connection = new SQLiteConnection(_connectionString))
             {
                 int id = connection.Execute(sql, entity);
                 return id;
             }
         }
-        public int Update(Mars entity)
-        {
-            string sql = "UPDATE Mars SET X = @X, Y = @Y";
-            using (IDbConnection connection = new SQLiteConnection(_connectionString))
-            {
-                int id = connection.Execute(sql, entity);
-                return id;
-            }
-        }
-        public Mars Get()
-        {
-            string sql = "SELECT * FROM  Mars";
-            using (IDbConnection connection = new SQLiteConnection(_connectionString))
-            {
-                Mars mars = connection.QueryFirst<Mars>(sql);
-                return mars;
-            }
-        }
+
         public void Delete()
         {
-            string sql = "DELETE FROM Mars";
+            string sql = "DELETE FROM Visited";
             using (IDbConnection connection = new SQLiteConnection(_connectionString))
             {
                 connection.Execute(sql);
             }
+        }
+        public IEnumerable<Visited> GetAll()
+        {
+            string sql = "SELECT * FROM Visited";
+            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            {
+                IEnumerable<Visited> visited = connection.Query<Visited>(sql);
+                return visited;
+            }
+        }
+        public Visited Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update(Visited entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

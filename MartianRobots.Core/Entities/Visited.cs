@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace MartianRobots.WebApi.DTOs
+namespace MartianRobots.Core.Entities
 {
-    public class RobotInputDTO
+    public class Visited
     {
+        public int Id { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
-        public string Or { get; set; }
-        public string Movements { get; set; }
     }
 }

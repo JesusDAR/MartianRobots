@@ -81,16 +81,20 @@ namespace MartianRobots.WebApi
         {
             services.AddTransient<IRobotServices, RobotServices>();
             services.AddTransient<IMarsServices, MarsServices>();
+            services.AddTransient<IInformationServices, InformationServices>();
+            services.AddTransient<IVisitedServices, VisitedServices>();
             return services;
         }
     }
-
+        
     public static class RepositoryExtensions
     {
         public static IServiceCollection RegisterRepositories(this IServiceCollection repositories)
         {
             repositories.AddScoped<IInformationRepository, InformationRepository>();
             repositories.AddScoped<IMarsRepository, MarsRepository>();
+            repositories.AddScoped<IRobotRepository, RobotRepository>();
+            repositories.AddScoped<IVisitedRepository, VisitedRepository>();
             return repositories;
         }
     }

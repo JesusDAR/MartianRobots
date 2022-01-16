@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MartianRobots.WebApi.Services.Interfaces
 {
-    public interface IRobotServices
+    public interface IVisitedServices
     {
-        RobotOutputDTO MoveRobot(RobotInputDTO robotInputDTO);
-        void DeleteRobots();
-        IEnumerable<RobotOutputDTO> GetAll();
+        public VisitedDTO Add(VisitedDTO visitedDTO);
+        public IEnumerable<VisitedDTO> GetAll();
+        public void DeleteVisited();
     }
 }

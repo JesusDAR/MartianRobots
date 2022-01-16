@@ -12,49 +12,48 @@ using System.Threading.Tasks;
 
 namespace MartianRobots.Core.Repositories
 {
-    public class MarsRepository : IMarsRepository
+    public class RobotRepository : IRobotRepository
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
-        public MarsRepository(IConfiguration configuration)
+        public RobotRepository(IConfiguration configuration)
         {
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
-        public int Add(Mars entity)
+        public int Add(Robot entity)
         {
-            string sql = "INSERT INTO Mars (X, Y) VALUES (@X, @Y)";
+            string sql = "INSERT INTO Robots (X_Initial, Y_Initial, Or_Initial, X_End, Y_End, Or_End, Success) VALUES (@X_Initial, @Y_Initial, @Or_Initial, @X_End, @Y_End, @Or_End, @Success)";
             using (IDbConnection connection = new SQLiteConnection(_connectionString))
             {
                 int id = connection.Execute(sql, entity);
                 return id;
-            }
-        }
-        public int Update(Mars entity)
-        {
-            string sql = "UPDATE Mars SET X = @X, Y = @Y";
-            using (IDbConnection connection = new SQLiteConnection(_connectionString))
-            {
-                int id = connection.Execute(sql, entity);
-                return id;
-            }
-        }
-        public Mars Get()
-        {
-            string sql = "SELECT * FROM  Mars";
-            using (IDbConnection connection = new SQLiteConnection(_connectionString))
-            {
-                Mars mars = connection.QueryFirst<Mars>(sql);
-                return mars;
             }
         }
         public void Delete()
         {
-            string sql = "DELETE FROM Mars";
+            string sql = "DELETE FROM Robots";
             using (IDbConnection connection = new SQLiteConnection(_connectionString))
             {
                 connection.Execute(sql);
             }
+        }
+        public IEnumerable<Robot> GetAll()
+        {
+            string sql = "SELECT * FROM Robots";
+            using (IDbConnection connection = new SQLiteConnection(_connectionString))
+            {
+                IEnumerable<Robot> robots = connection.Query<Robot>(sql);
+                return robots;
+            }
+        }
+        public Robot Get()
+        {
+            throw new NotImplementedException();
+        }
+        public int Update(Robot entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
