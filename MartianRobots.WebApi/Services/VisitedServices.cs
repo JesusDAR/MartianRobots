@@ -19,7 +19,7 @@ namespace MartianRobots.WebApi.Services
             _mapper = mapper;
             _visitedRepository = visitedRepository;
         }
-        public VisitedDTO Add(VisitedDTO visitedDTO)
+        public VisitedDTO AddVisited(VisitedDTO visitedDTO)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace MartianRobots.WebApi.Services
             }
             return visitedDTO;
         }
-        public IEnumerable<VisitedDTO> GetAll()
+        public IEnumerable<VisitedDTO> GetAllVisited()
         {
             try
             {

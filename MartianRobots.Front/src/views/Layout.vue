@@ -7,7 +7,9 @@
                         <table v-if="$store.state.mars.x != -1 && $store.state.mars.y != -1" class="mt-5">
                             <tr v-for="r in $store.state.mars.y + 2">
                                 <td align="center" v-for="c in $store.state.mars.x + 2">
-
+                                    <span v-for="v in $store.state.visited">
+                                        <v-icon  v-if=" c == (v.x + 2) && r == ($store.state.mars.y + 2) - (v.y + 1) ">mdi-flag</v-icon>
+                                    </span>
                                     <span v-if="c == 1 && r != $store.state.mars.y + 2"> 
                                         {{$store.state.mars.y - (r - 1) }}
                                     </span>
@@ -197,6 +199,7 @@ export default {
             this.robot_x = -1
             this.robot_y = -1
             this.orientation = ''
+            this.$store.commit('setVisited', {})
             await this.$store.dispatch('deleteRobots')
             await this.$store.dispatch('deleteInformation')
             await this.$store.dispatch('deleteVisited')
@@ -220,6 +223,7 @@ export default {
         async setMovements() {
             await this.$store.dispatch('sendRobot')
             await this.$store.dispatch('getInformation')
+            await this.$store.dispatch('getAllVisited')
             let robot = {
                 x : -1,
                 y : -1,

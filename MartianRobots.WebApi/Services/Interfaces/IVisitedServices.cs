@@ -8,8 +8,8 @@ namespace MartianRobots.WebApi.Services.Interfaces
 {
     public interface IVisitedServices
     {
-        public VisitedDTO Add(VisitedDTO visitedDTO);
-        public IEnumerable<VisitedDTO> GetAll();
+        public VisitedDTO AddVisited(VisitedDTO visitedDTO);
+        public IEnumerable<VisitedDTO> GetAllVisited();
         public void DeleteVisited();
     }
 }

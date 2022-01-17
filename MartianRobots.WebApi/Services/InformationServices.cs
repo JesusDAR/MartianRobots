@@ -35,7 +35,7 @@ namespace MartianRobots.WebApi.Services
 
                 informationDTO.RobotsSucceeded = robots.Where(s => s.Success == true).Count();
                 informationDTO.RobotsLost = robots.Where(s => s.Success == false).Count();
-                informationDTO.SurfaceExplored = _visitedServices.GetAll().Count();
+                informationDTO.SurfaceExplored = _visitedServices.GetAllVisited().Count();
                 informationDTO.SurfaceUnexplored = ((marsDTO.X + 1) * (marsDTO.Y + 1)) - informationDTO.SurfaceExplored;
                 Information information = _mapper.Map<Information>(informationDTO);
                 _informationRepository.Update(information);

@@ -39,7 +39,7 @@ namespace MartianRobots.WebApi.Services
                 robotOutputDTO.Error = new ErrorDTO { };
                 MarsDTO marsDTO = _marsServices.GetMars();
                 IEnumerable<RobotOutputDTO> robots = GetAll();
-                IEnumerable<VisitedDTO> visited = _visitedServices.GetAll();
+                IEnumerable<VisitedDTO> visited = _visitedServices.GetAllVisited();
                 VisitedDTO visitedDTO;
                 if (!visited.Any(s => s.X == robotInputDTO.X && s.Y == robotInputDTO.Y))
                 {
@@ -48,7 +48,7 @@ namespace MartianRobots.WebApi.Services
                         X = robotOutputDTO.X,
                         Y = robotOutputDTO.Y
                     };
-                    _visitedServices.Add(visitedDTO);
+                    _visitedServices.AddVisited(visitedDTO);
                 }
 
                 foreach (char m in robotInputDTO.Movements)
@@ -87,7 +87,7 @@ namespace MartianRobots.WebApi.Services
                                 X = robotOutputDTO.X,
                                 Y = robotOutputDTO.Y
                             };
-                            _visitedServices.Add(visitedDTO);
+                            _visitedServices.AddVisited(visitedDTO);
                         }
                     }
 

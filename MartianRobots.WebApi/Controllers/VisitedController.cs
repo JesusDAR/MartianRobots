@@ -1,4 +1,5 @@
-﻿using MartianRobots.WebApi.Services.Interfaces;
+﻿using MartianRobots.WebApi.DTOs;
+using MartianRobots.WebApi.Services.Interfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,6 +25,13 @@ namespace MartianRobots.WebApi.Controllers
         {
             _visitedServices.DeleteVisited();
             return Ok();
+        }
+
+        [HttpGet()]
+        public IActionResult GetAllVisited()
+        {
+            IEnumerable<VisitedDTO> visitedList = _visitedServices.GetAllVisited();
+            return Ok(visitedList);
         }
 
     }

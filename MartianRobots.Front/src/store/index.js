@@ -29,7 +29,8 @@ export default new Vuex.Store({
       surfaceExplored : 0,
       surfaceUnexplored : 0
     },
-    output : ''
+    output : '',
+    visited : {}
   },
   mutations : {
     setMars(state, mars) {
@@ -52,7 +53,10 @@ export default new Vuex.Store({
     },
     setOutput(state, output) {
       state.output = output
-    },    
+    },
+    setVisited(state, visitedList) {
+      state.visited = visitedList
+    },            
   },
 
   actions : {
@@ -163,6 +167,17 @@ export default new Vuex.Store({
       return axios.delete(api).catch( (error) => {
         context.commit('setError', error.message)
       })      
+    },
+
+    async getAllVisited(context){
+      let api = this.state.url + '/visited'
+      return axios.get(api).then( (response) => {
+        console.log(response.data)
+        context.commit('setVisited', response.data)
+      })
+      .catch( (error) => {
+        context.commit('setError', error.message)
+      })
     }
   },
 
