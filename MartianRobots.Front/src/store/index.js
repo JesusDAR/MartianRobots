@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    url : 'https://localhost:44307/api',
+    url : 'http://localhost:44307/api',
     error : '',
     mars : {
       x : -1,
