@@ -7,6 +7,11 @@ To use it you need first to input the surface of Mars in X/Y coordinates, then s
 
 
 
+## Prerequirements
+
+* .NET 5 SDK
+
+* Node JS
 
 ## Run Locally
 
